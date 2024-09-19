@@ -1,9 +1,14 @@
+import { useAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
-import { View, Text } from "react-native";
+import { Redirect, Tabs } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CallRoutesLayout() {
+  const { isSignedIn } = useAuth();
+
+  if (!isSignedIn) {
+    return <Redirect href={"/(auth)"} />;
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Tabs
@@ -29,7 +34,7 @@ export default function CallRoutesLayout() {
         <Tabs.Screen
           name="join"
           options={{
-            title: "Join Calls",
+            title: "Join Call",
             headerTitle: "Enter the Room ID",
             tabBarIcon: ({ color }) => (
               <Ionicons name="enter-outline" size={24} color={color} />

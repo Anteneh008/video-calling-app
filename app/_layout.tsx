@@ -1,7 +1,7 @@
 import "react-native-reanimated";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import { Slot } from "expo-router";
-import { tokenCache } from "@/lib/auth";
+import { tokenCache } from "@/lib/x";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
