@@ -1,9 +1,23 @@
 import { useOAuth } from "@clerk/clerk-expo";
+import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
-import React, { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import StyledButton from "./StyledButton";
 
+export const useWarmUpBrowser = () => {
+  useEffect(() => {
+    void WebBrowser.warmUpAsync();
+    return () => {
+      void WebBrowser.coolDownAsync();
+    };
+  }, []);
+};
+
+WebBrowser.maybeCompleteAuthSession();
+
 const SignInWithOAuth = () => {
+  useWarmUpBrowser();
+
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
 
   const onPress = useCallback(async () => {
@@ -12,6 +26,8 @@ const SignInWithOAuth = () => {
         await startOAuthFlow({
           redirectUrl: Linking.createURL("/(call)/", { scheme: "myapp" }),
         });
+
+      console.log("createdSessionId",createdSessionId);
 
       if (createdSessionId) {
         setActive!({ session: createdSessionId });

@@ -6,12 +6,11 @@ import { Link, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
   Alert,
-  Button,
   KeyboardAvoidingView,
   Platform,
   Text,
   TextInput,
-  View,
+  View
 } from "react-native";
 
 export default function SignInScreen() {

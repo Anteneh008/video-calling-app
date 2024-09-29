@@ -32,6 +32,7 @@ export default function AuthRoutesLayout() {
             headerBackTitle: "Sign In",
             headerStyle: { backgroundColor: "#5F5DEC" },
             headerTintColor: "white",
+            headerShown: false,
           }}
         />
       </Stack>
